@@ -1,9 +1,14 @@
 const box = document.querySelector('.box')
 
-box.addEventListener('click', () => {
-    console.log("click")
+const addChild = event => {
     const newBox = document.createElement('div')
+
     newBox.classList.add('box')
-    box.appendChild(newBox)
-    // box.classList.remove('box')
-})
+    event.target.appendChild(newBox)
+
+    event.target.removeEventListener('click', addChild)
+
+    newBox.addEventListener('click', addChild)
+}
+
+box.addEventListener('click', addChild)
